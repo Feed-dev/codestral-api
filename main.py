@@ -66,3 +66,21 @@ chat_response = client.chat(
     messages=messages
 )
 print(chat_response.choices[0].message.content)
+
+# 5. Integration with LangChain
+from langchain_mistralai import ChatMistralAI
+from langchain_core.prompts import ChatPromptTemplate
+
+llm = ChatMistralAI(model="codestral-latest", temperature=0, api_key=api_key)
+print(llm.invoke([("user", "Write a function for fibonacci")]))
+
+# 6. Integration with LlamaIndex
+from llama_index.core.llms import ChatMessage
+from llama_index.llms.mistralai import MistralAI
+
+messages = [
+    ChatMessage(role="user", content="Write a function for fibonacci"),
+]
+llm = MistralAI(model="codestral-latest", api_key=api_key)
+response = llm.chat(messages)
+print(response)
